@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import List from './components/List.js'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Contact List!</h1>
+            <List />
       </div>
     );
   }
