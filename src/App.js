@@ -31,27 +31,28 @@ export default class App extends Component {
                     name: 'Cosmo Kramer',
                     occupation: 'occupation unknown',
                     avatar: 'http://marcmyers.typepad.com/.a/6a00e008dca1f0883401a511539249970c-600wi' 
-                },
+                }
             ]
  }
-        handleChange(event) {
-            this.setState({
-                members: this.state.members,
-                searchText: event.target.value
-            })
-        }
-
-        getFilteredList() {
-            const term = this.state.searchText.trim().toLowerCase()
-            const members = this.state.members
-
-            if (!term) return members
-
-            return members.filter(member => {
-                return member.name.toLowerCase().search(term) >= 0
-            })
-        }
+            }
+    handleChange(event) {
+        this.setState({
+            members: this.state.members,
+            searchText: event.target.value
+        })
     }
+
+    getFilteredList() {
+        const term = this.state.searchText.trim().toLowerCase()
+        const members = this.state.members
+
+        if (!term) return members
+
+        return members.filter(member => {
+            return member.name.toLowerCase().search(term) >= 0
+        })
+    }
+
   render() {
     return (
       <div className="App">
