@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import List from './List.js'
 
 export default class Contact extends Component {
     render() {
