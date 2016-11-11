@@ -37,7 +37,7 @@ export default class App extends Component {
             }
     handleChange(event) {
         this.setState({
-            members: this.state.members,
+            ...this.state,
             searchText: event.target.value
         })
     }
