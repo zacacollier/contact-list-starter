@@ -1,24 +1,24 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Contact from './Contact.js'
 
-export default class List extends Component {
-    render() {
-        return (
-                <ul className="contact-list">
-                {
-                    this.props.members.map(member => {
-                        return (
-                                <Contact
-                                    key={member._id}
-                                    name={member.name}
-                                    occupation={member.occupation}
-                                    avatar={member.avatar}
-                                />
-                            )
-                        }
-                    )
-                }
-                </ul>
-        )
-    }
+const List = (props) => {
+    return (
+            <ul className="contact-list">
+            {
+                props.members.map(member => {
+                    return (
+                            <Contact
+                                key={member._id}
+                                name={member.name}
+                                occupation={member.occupation}
+                                avatar={member.avatar}
+                            />
+                        )
+                    }
+                )
+            }
+            </ul>
+    )
 }
+
+export default List

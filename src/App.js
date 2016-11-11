@@ -58,7 +58,7 @@ export default class App extends Component {
       <div className="App">
             <SearchBar
                 value={this.state.searchText}
-        onChange={this.handleChange.bind(this)}
+        onChange={(event) => this.handleChange(event)}
             />
             <List members={this.getFilteredList()} />
       </div>
