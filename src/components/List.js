@@ -6,7 +6,7 @@ export default class List extends Component {
         return (
                 <ul className="contact-list">
                 {
-                    this.state.members.map(member => {
+                    this.props.members.map(member => {
                         return (
                                 <Contact
                                     key={member._id}
