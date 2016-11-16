@@ -42,6 +42,7 @@ export default class App extends Component {
         })
     }
 
+    //TODO: import object assist for input scrubbing
     getFilteredList() {
         const term = this.state.searchText.trim().toLowerCase()
         const members = this.state.members
