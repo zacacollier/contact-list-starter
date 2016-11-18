@@ -50,7 +50,7 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        axios.get('localhost:3001')
+        axios.get('http://localhost:3001/api/contacts')
             .then(resp => {
                 this.setState({
                 ...this.state,
