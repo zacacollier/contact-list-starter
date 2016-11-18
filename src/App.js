@@ -42,6 +42,14 @@ export default class App extends Component {
         })
     }
 
+    componentWillMount() {
+        console.log("componentWillMount")
+        debugger
+    }
+    componentDidMount() {
+        console.log("componentDidMount")
+        debugger
+    }
     //TODO: import object assist for input scrubbing
     getFilteredList() {
         const term = this.state.searchText.trim().toLowerCase()
@@ -55,6 +63,8 @@ export default class App extends Component {
     }
 
   render() {
+      console.log("render")
+      debugger
     return (
       <div className="App">
             <SearchBar
