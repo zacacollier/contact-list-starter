@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import axios from 'axios'
+
 import List from './components/List.js'
 import SearchBar from './components/SearchBar.js'
 
@@ -30,7 +32,7 @@ export default class App extends Component {
                     _id: 'kramer',
                     name: 'Cosmo Kramer',
                     occupation: 'occupation unknown',
-                    avatar: 'http://marcmyers.typepad.com/.a/6a00e008dca1f0883401a511539249970c-600wi' 
+                    avatar: 'http://marcmyers.typepad.com/.a/6a00e008dca1f0883401a511539249970c-600wi'
                 }
             ]
  }
@@ -46,11 +48,21 @@ export default class App extends Component {
         console.log("componentWillMount")
         debugger
     }
+
     componentDidMount() {
-        console.log("componentDidMount")
-        debugger
+        axios.get('localhost:3001')
+            .then(resp => {
+                this.setState({
+                ...this.state,
+                members: resp.data
+                })
+            })
+            .catch(err => console.log(`ERROR: ${err}`))
     }
-    //TODO: import object assist for input scrubbing
+
+    // handleAddMember() {}
+    // TODO: write in the axios.post logic
+    // TODO: import object assist for input scrubbing
     getFilteredList() {
         const term = this.state.searchText.trim().toLowerCase()
         const members = this.state.members
