@@ -3,61 +3,84 @@ import axios from 'axios'
 
 import List from './components/List.js'
 import SearchBar from './components/SearchBar.js'
+import AddNewMember from './components/AddNewMember.js'
 
 export default class App extends Component {
     constructor() {
         super()
         this.state = {
             searchText: '',
-            members: [
-                {
-                    _id: 'jerome',
-                    name: 'Jerry Seinfeld',
-                    occupation: 'Comedian',
-                    avatar: 'https://pbs.twimg.com/profile_images/433319671430123521/LAm8cB1b.jpeg'
-                },
-                {
-                    _id: 'elaine',
-                    name: 'Elaine Benes',
-                    occupation: 'Personal Assistant',
-                    avatar: 'http://vignette2.wikia.nocookie.net/parody/images/5/57/Elaine.jpg/revision/latest?cb=20140720224240'
-                },
-                {
-                    _id: 'george',
-                    name: 'George Costanza',
-                    occupation: 'Architect',
-                    avatar: 'http://www.seinfeld-fan.net/pictures/george/george_costanza029.jpg'
-                },
-                {
-                    _id: 'kramer',
-                    name: 'Cosmo Kramer',
-                    occupation: 'occupation unknown',
-                    avatar: 'http://marcmyers.typepad.com/.a/6a00e008dca1f0883401a511539249970c-600wi'
-                }
-            ]
+            members: [],
+            value: 'Add...'
+        }
+        /* members: [
+         *       {
+         *           _id: 'jerome',
+         *           name: 'Jerry Seinfeld',
+         *           occupation: 'Comedian',
+         *           avatar: 'https://pbs.twimg.com/profile_images/433319671430123521/LAm8cB1b.jpeg'
+         *       },
+         *       {
+         *           _id: 'elaine',
+         *           name: 'Elaine Benes',
+         *           occupation: 'Personal Assistant',
+         *           avatar: 'http://vignette2.wikia.nocookie.net/parody/images/5/57/Elaine.jpg/revision/latest?cb=20140720224240'
+         *       },
+         *       {
+         *           _id: 'george',
+         *           name: 'George Costanza',
+         *           occupation: 'Architect',
+         *           avatar: 'http://www.seinfeld-fan.net/pictures/george/george_costanza029.jpg'
+         *       },
+         *       {
+         *           _id: 'kramer',
+         *           name: 'Cosmo Kramer',
+         *           occupation: 'occupation unknown',
+         *           avatar: 'http://marcmyers.typepad.com/.a/6a00e008dca1f0883401a511539249970c-600wi'
+         *       }
+         *   ]*/
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
  }
-            }
     handleChange(event) {
         this.setState({
-            ...this.state,
+            members: this.state.members,
             searchText: event.target.value
         })
     }
 
+    handleSubmit(event) {
+        /* this.setState({
+         *     value: event.target.value
+         * })*/
+        console.log(this.state.value)
+        /* this.setState({
+         *     members: this.state.members
+         *     searchText: event.target.value
+         * })*/
+    }
+
     componentWillMount() {
         console.log("componentWillMount")
-        debugger
     }
 
     componentDidMount() {
         axios.get('http://localhost:3001/api/contacts')
             .then(resp => {
                 this.setState({
-                ...this.state,
-                members: resp.data
+                    searchText: this.state.searchText,
+                    members: resp.data
                 })
             })
             .catch(err => console.log(`ERROR: ${err}`))
+        /* axios.post('http://localhost:3001/api/contacts')
+         *      .then(resp => {
+         *          this.setState({
+         *              searchText: this.state.searchText,
+         *              members: [member].concat(this.state.members)
+         *          })
+         *      })
+         *     .catch(err => console.log(`ERROR: ${err}`))*/
     }
 
     // handleAddMember() {}
@@ -76,13 +99,16 @@ export default class App extends Component {
 
   render() {
       console.log("render")
-      debugger
     return (
       <div className="App">
             <SearchBar
                 value={this.state.searchText}
         onChange={(event) => this.handleChange(event)}
             />
+            <AddNewMember
+                value={this.state.value}
+                onSubmit={this.handleSubmit(event)}
+                />
             <List members={this.getFilteredList()} />
       </div>
     );
