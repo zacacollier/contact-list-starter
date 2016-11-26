@@ -1,46 +1,74 @@
 import React, { Component, PropTypes } from 'react'
 
 export default class AddNewMember extends Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
-            value: '',
             name: '',
             occupation: '',
             avatar: ''
         }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
     }
     handleChange(event) {
+        const { name: attribute } = event.target
         this.setState({
-            value: event.target.value
+            value: event.target.value,
+            name: attribute.name,
+            occupation: attribute.occupation,
+            avatar: attribute.avatar
         })
     }
     handleSubmit(event) {
         event.preventDefault()
-        console.log(this.state.value)
+        const { name, occupation, avatar } = this.state
+        this.props.onAdd({ name, occupation, avatar })
     }
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    Add a 
-                    <textarea className="search-bar" value={this.state.value} onChange={this.handleChange} />
-                </label>
-                <input
-                className="search-bar"
-                type="submit"
-                value={this.state.value}
-                onSubmit={(event) => this.onSubmit(event)}
-                />
-            </form>
+            <div>
+                <form ={this.handleSubmit.bind(this)}>
+                    <label htmlFor="name">
+                        Name:
+                    </label>
+                    <input
+                        className="search-bar"
+                        type="text"
+                        name="name"
+                        value={this.state.name}
+                        onChange={this.handleChange.bind(this)}
+                    />
+                    <label htmlFor="name">
+                        Occupation:
+                    </label>
+                    <input
+                        className="search-bar"
+                        type="text"
+                        name="occupation"
+                        value={this.state.occupation}
+                        onChange={this.handleChange.bind(this)}
+                    />
+                    <label htmlFor="name">
+                        Avatar:
+                    </label>
+                    <input
+                        className="search-bar"
+                        type="text"
+                        name="avatar"
+                        value={this.state.avatar}
+                        onChange={this.handleChange.bind(this)}
+                    />
+                    <input
+                        type="submit"
+                        value="Add New Member"
+                        disabled={!!this.state.name}
+                    />
+                </form>
+            </div>
         )
     }
 }
 
 AddNewMember.propTypes = {
-    value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
+    onAdd: PropTypes.func.isRequired
 }
 

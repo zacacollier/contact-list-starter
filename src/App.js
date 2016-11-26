@@ -10,8 +10,7 @@ export default class App extends Component {
         super()
         this.state = {
             searchText: '',
-            members: [],
-            value: 'Add...'
+            members: []
         }
         /* members: [
          *       {
@@ -39,29 +38,12 @@ export default class App extends Component {
          *           avatar: 'http://marcmyers.typepad.com/.a/6a00e008dca1f0883401a511539249970c-600wi'
          *       }
          *   ]*/
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
  }
     handleChange(event) {
         this.setState({
             members: this.state.members,
             searchText: event.target.value
         })
-    }
-
-    handleSubmit(event) {
-        /* this.setState({
-         *     value: event.target.value
-         * })*/
-        console.log(this.state.value)
-        /* this.setState({
-         *     members: this.state.members
-         *     searchText: event.target.value
-         * })*/
-    }
-
-    componentWillMount() {
-        console.log("componentWillMount")
     }
 
     componentDidMount() {
@@ -73,19 +55,21 @@ export default class App extends Component {
                 })
             })
             .catch(err => console.log(`ERROR: ${err}`))
-        /* axios.post('http://localhost:3001/api/contacts')
-         *      .then(resp => {
-         *          this.setState({
-         *              searchText: this.state.searchText,
-         *              members: [member].concat(this.state.members)
-         *          })
-         *      })
-         *     .catch(err => console.log(`ERROR: ${err}`))*/
     }
 
-    // handleAddMember() {}
-    // TODO: write in the axios.post logic
-    // TODO: import object assist for input scrubbing
+    handleAddMember(attributes) {
+        console.log(attributes)
+        axios.post('http://localhost:3001/api/contacts', {
+        })
+             .then(resp => {
+                 console.log(resp)
+                 this.setState({
+                         members: resp.data.members
+                 })
+             })
+             .catch(err => console.log(`ERROR: ${err}`))
+    }
+
     getFilteredList() {
         const term = this.state.searchText.trim().toLowerCase()
         const members = this.state.members
@@ -98,7 +82,6 @@ export default class App extends Component {
     }
 
   render() {
-      console.log("render")
     return (
       <div className="App">
             <SearchBar
@@ -106,12 +89,10 @@ export default class App extends Component {
         onChange={(event) => this.handleChange(event)}
             />
             <AddNewMember
-                value={this.state.value}
-                onSubmit={this.handleSubmit(event)}
+                onAdd={this.handleAddMember.bind(this)}
                 />
             <List members={this.getFilteredList()} />
       </div>
     );
   }
 }
-
