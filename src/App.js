@@ -49,25 +49,31 @@ export default class App extends Component {
     componentDidMount() {
         axios.get('http://localhost:3001/api/contacts')
             .then(resp => {
+                console.log(resp.data)
                 this.setState({
                     searchText: this.state.searchText,
                     members: resp.data
                 })
             })
-            .catch(err => console.log(`ERROR: ${err}`))
+            .catch(err => console.log(`${err}`))
     }
 
     handleAddMember(attributes) {
         console.log(attributes)
-        axios.post('http://localhost:3001/api/contacts', {
-        })
+        axios.post('http://localhost:3001/api/contacts/', attributes)
              .then(resp => {
-                 console.log(resp)
-                 this.setState({
-                         members: resp.data.members
+                 console.log(resp.data)
+                 this.setState(prev => {
+                     return {
+                         ...prev,
+                         members: [...prev.members, resp.data]
+                         }
                  })
              })
-             .catch(err => console.log(`ERROR: ${err}`))
+               .catch(err => {
+                   debugger
+                   console.log(`ERROR: ${err}`)
+               })
     }
 
     getFilteredList() {

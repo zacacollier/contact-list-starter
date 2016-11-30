@@ -4,8 +4,8 @@ export default class AddNewMember extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            name: '',
             occupation: '',
+            name: '',
             avatar: ''
         }
         this.handleChange = this.handleChange.bind(this)
@@ -62,7 +62,10 @@ export default class AddNewMember extends Component {
                     <input
                         type="submit"
                         value="Add New Member"
-                        disabled={!!this.state.name}
+                        disabled={!this.state.name.trim()
+                               || !this.state.avatar.trim()
+                               || !this.state.avatar.trim()
+                                 }
                     />
                 </form>
             </div>

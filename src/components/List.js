@@ -9,6 +9,7 @@ const List = (props) => {
                     return (
                             <Contact
                                 key={member._id}
+                                id={member._id}
                                 name={member.name}
                                 occupation={member.occupation}
                                 avatar={member.avatar}

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Contact = (props) => {
     return (
-            <li className="contact">
+            <li id={props.id} className="contact">
                 <div className="image-cropper">
                     <img src={props.avatar} alt="avatar"/>
                 </div>
@@ -14,4 +14,4 @@ const Contact = (props) => {
     )
 }
 
-export default Contact 
+export default Contact
