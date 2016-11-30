@@ -1,22 +1,24 @@
 import React, { Component, PropTypes } from 'react'
 
 export default class AddNewMember extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             name: '',
             occupation: '',
             avatar: ''
         }
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
     handleChange(event) {
         const { name: attribute } = event.target
         this.setState({
-            value: event.target.value,
-            name: attribute.name,
-            occupation: attribute.occupation,
-            avatar: attribute.avatar
+            ...this.state,
+            [attribute]: event.target.value
         })
+        console.log(attribute)
+        console.log(this.state)
     }
     handleSubmit(event) {
         event.preventDefault()
@@ -26,36 +28,36 @@ export default class AddNewMember extends Component {
     render() {
         return (
             <div>
-                <form ={this.handleSubmit.bind(this)}>
+                <form onSubmit={this.handleSubmit}>
                     <label htmlFor="name">
                         Name:
                     </label>
                     <input
+                        name="name"
                         className="search-bar"
                         type="text"
-                        name="name"
                         value={this.state.name}
-                        onChange={this.handleChange.bind(this)}
+                        onChange={this.handleChange}
                     />
                     <label htmlFor="name">
                         Occupation:
                     </label>
                     <input
+                        name="occupation"
                         className="search-bar"
                         type="text"
-                        name="occupation"
                         value={this.state.occupation}
-                        onChange={this.handleChange.bind(this)}
+                        onChange={this.handleChange}
                     />
                     <label htmlFor="name">
                         Avatar:
                     </label>
                     <input
+                        name="avatar"
                         className="search-bar"
                         type="text"
-                        name="avatar"
                         value={this.state.avatar}
-                        onChange={this.handleChange.bind(this)}
+                        onChange={this.handleChange}
                     />
                     <input
                         type="submit"
