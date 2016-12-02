@@ -35,7 +35,6 @@ export default class App extends Component {
     handleAddMember(attributes) {
         axios.post('/api/contacts/', attributes)
              .then(resp => {
-                 console.log(resp.data)
                  this.setState(prev => {
                      return {
                          ...prev,
@@ -45,15 +44,31 @@ export default class App extends Component {
              })
                .catch(err => {
                    debugger
-                   console.log(`ERROR: ${err}`)
+                   console.log(`POST error: ${err}`)
                })
+    }
+
+    handleDeleteMember(targetID) {
+        const { members } = this.state
+        const stateTarget = members.filter((member) => member._id)
+        console.log(stateTarget)
+        debugger
+        /* axios.delete('/api/contacts/${targetID}')
+         *      .then(resp => {
+         *          this.setState(prev => {
+         *              return {
+         *                  ...prev,
+         *                  members: [...prev.members, resp.data]
+         *              }
+         *          })
+         *      })
+         *      .catch(err => {console.log(`DELETE error: ${err}`)})*/
     }
 
     getFilteredList() {
         const term = this.state.searchText.trim().toLowerCase()
         const members = this.state.members
         if (!term) return members
-
         return members.filter(member => {
             return member.name.toLowerCase().search(term) >= 0
         })
@@ -64,12 +79,14 @@ export default class App extends Component {
       <div className="App">
             <SearchBar
                 value={this.state.searchText}
-        onChange={(event) => this.handleChange(event)}
+                onChange={(event) => this.handleChange(event)}
             />
             <AddNewMember
                 onAdd={this.handleAddMember.bind(this)}
-                />
-            <List members={this.getFilteredList()} />
+            />
+            <List members={this.getFilteredList()}
+                  onDelete={this.handleDeleteMember.bind(this)}
+            />
       </div>
     );
   }

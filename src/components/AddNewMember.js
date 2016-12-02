@@ -46,7 +46,7 @@ export default class AddNewMember extends Component {
                         name="occupation"
                         className="search-bar"
                         type="text"
-                        value={this.state.occupation}
+                        value={this.state.mccupation}
                         onChange={this.handleChange}
                     />
                     <label htmlFor="name">
