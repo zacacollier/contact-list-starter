@@ -15,7 +15,7 @@ export default class List extends Component {
                                     name={member.name}
                                     occupation={member.occupation}
                                     avatar={member.avatar}
-                                    onDelete={this.props.onDelete.bind(this)}
+                                    handleDelete={this.props.handleDelete.bind(this)}
                                 />
                             )
                         }

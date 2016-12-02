@@ -5,7 +5,7 @@ export default class Contact extends Component {
         event.preventDefault()
         const { id } = this.props
         console.log(id)
-        // this.props.handleDelete(member.id)
+        this.props.handleDelete(id)
     }
     render() {
         return (

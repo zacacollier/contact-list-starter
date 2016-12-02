@@ -50,7 +50,7 @@ export default class App extends Component {
 
     handleDeleteMember(targetID) {
         const { members } = this.state
-        const stateTarget = members.filter((member) => member._id)
+        const stateTarget = members.filter((member) => member ? member._id.includes(targetID) : null)
         console.log(stateTarget)
         debugger
         /* axios.delete('/api/contacts/${targetID}')
@@ -85,7 +85,7 @@ export default class App extends Component {
                 onAdd={this.handleAddMember.bind(this)}
             />
             <List members={this.getFilteredList()}
-                  onDelete={this.handleDeleteMember.bind(this)}
+                  handleDelete={this.handleDeleteMember.bind(this)}
             />
       </div>
     );
