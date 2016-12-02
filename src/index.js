@@ -10,14 +10,14 @@ const Router = () => {
         <BrowserRouter>
             <div>
                 <Match exactly pattern="/" component={App} />
-                <Match pattern="/" component={Profile} />
-                <Miss render{() => <h2>Not Found...</h2>}/>
+                <Match pattern="/profile/:id" component={Profile} />
+                <Miss render={() => <h2>Not Found...</h2>}  />
             </div>
         </BrowserRouter>
     )
 }
 
 ReactDOM.render(
-  <App />,
+    <Router />,
   document.getElementById('root')
 )

@@ -21,7 +21,7 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3001/api/contacts')
+        axios.get('/api/contacts')
             .then(resp => {
                 console.log(resp.data)
                 this.setState({
@@ -33,7 +33,7 @@ export default class App extends Component {
     }
 
     handleAddMember(attributes) {
-        axios.post('http://localhost:3001/api/contacts/', attributes)
+        axios.post('/api/contacts/', attributes)
              .then(resp => {
                  console.log(resp.data)
                  this.setState(prev => {
@@ -52,7 +52,6 @@ export default class App extends Component {
     getFilteredList() {
         const term = this.state.searchText.trim().toLowerCase()
         const members = this.state.members
-
         if (!term) return members
 
         return members.filter(member => {
