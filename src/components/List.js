@@ -13,6 +13,7 @@ const List = (props) => {
                                 name={member.name}
                                 occupation={member.occupation}
                                 avatar={member.avatar}
+                                onDelete={member.onDelete}
                             />
                         )
                     }
