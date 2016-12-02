@@ -56,7 +56,6 @@ body {
   height: 100px;
   position: relative;
   overflow: hidden;
-  border-radius: 50%;
 }
 
 .contact img {
@@ -85,11 +84,36 @@ body {
 }
 
 .profile .image-cropper {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 25px solid rgba(255,255,255,.2);
+    transition: border .4s ease-out;
+}
+
+.profile .image-cropper:hover {
   width: 200px;
   height: 200px;
   position: relative;
   overflow: hidden;
   border-radius: 50%;
+  box-sizing: border-box;
+  border: 0px solid;
+  transition: border .4s ease-out;
+}
+
+.profile .image-cropper:after {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 25px solid rgba(255,255,255,.4);
+    transition: border .4s ease-out;
 }
 
 .profile img {
