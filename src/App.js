@@ -50,19 +50,18 @@ export default class App extends Component {
 
     handleDeleteMember(targetID) {
         const { members } = this.state
-        const stateTarget = members.filter((member) => member ? member._id.includes(targetID) : null)
-        console.log(stateTarget)
-        debugger
-        /* axios.delete('/api/contacts/${targetID}')
-         *      .then(resp => {
-         *          this.setState(prev => {
-         *              return {
-         *                  ...prev,
-         *                  members: [...prev.members, resp.data]
-         *              }
-         *          })
-         *      })
-         *      .catch(err => {console.log(`DELETE error: ${err}`)})*/
+        const filteredMembers = members.filter(member => member ? !member._id.includes(targetID) : null)
+        console.log(filteredMembers)
+        axios.delete(`/api/contacts/${targetID}`)
+                                       .then(resp => {
+                                           this.setState(prev => {
+                                               return {
+                                                   ...prev,
+                                                   members: filteredMembers
+                                               }
+                                           })
+                                       })
+                                       .catch(err => {console.log(`DELETE error: ${err}`)})
     }
 
     getFilteredList() {
