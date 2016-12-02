@@ -33,7 +33,6 @@ export default class App extends Component {
     }
 
     handleAddMember(attributes) {
-        console.log(attributes)
         axios.post('http://localhost:3001/api/contacts/', attributes)
              .then(resp => {
                  console.log(resp.data)
